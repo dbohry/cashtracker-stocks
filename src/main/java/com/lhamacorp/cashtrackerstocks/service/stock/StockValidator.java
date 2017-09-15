@@ -1,5 +1,6 @@
-package com.lhamacorp.cashtrackerstocks.entity;
+package com.lhamacorp.cashtrackerstocks.service.stock;
 
+import com.lhamacorp.cashtrackerstocks.entity.stock.Stock;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 

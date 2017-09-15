@@ -1,9 +1,9 @@
 package com.lhamacorp.cashtrackerstocks.controller;
 
-import com.lhamacorp.cashtrackerstocks.entity.stock.Stock;
-import com.lhamacorp.cashtrackerstocks.entity.stock.StockConverter;
-import com.lhamacorp.cashtrackerstocks.entity.stock.StockDTO;
-import com.lhamacorp.cashtrackerstocks.service.stock.StockService;
+import com.lhamacorp.cashtrackerstocks.entity.trade.Trade;
+import com.lhamacorp.cashtrackerstocks.entity.trade.TradeConverter;
+import com.lhamacorp.cashtrackerstocks.entity.trade.TradeDTO;
+import com.lhamacorp.cashtrackerstocks.service.trade.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,40 +14,40 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ct/secure/stocks")
-public class StockController {
+@RequestMapping("/ct/secure/operations")
+public class TradeController {
 
-    private StockService service;
-    private StockConverter converter;
+    private TradeService service;
+    private TradeConverter converter;
 
     @Autowired
-    public StockController(StockService service,
-                           StockConverter converter) {
+    public TradeController(TradeService service,
+                           TradeConverter converter) {
         this.service = service;
         this.converter = converter;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<StockDTO>> getAll(@RequestHeader("authorization") String token) {
-        List<Stock> response = service.getAll();
+    public ResponseEntity<List<TradeDTO>> getAll(@RequestHeader("authorization") String token) {
+        List<Trade> response = service.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(response.stream()
                 .map(converter::convert)
                 .collect(Collectors.toList()));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<StockDTO> save(@RequestBody StockDTO dto,
+    public ResponseEntity<TradeDTO> save(@RequestBody TradeDTO dto,
                                          @RequestHeader("authorization") String token) throws ServletException {
-        Stock response = service.save(converter.convert(dto));
+        Trade response = service.save(converter.convert(dto), token);
         return ResponseEntity.status(HttpStatus.CREATED).body(converter.convert(response));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<StockDTO> update(@PathVariable("id") Long id,
-                                                  @RequestBody StockDTO dto,
-                                                  @RequestHeader("authorization") String token) throws ServletException {
+    public ResponseEntity<TradeDTO> update(@PathVariable("id") Long id,
+                                           @RequestBody TradeDTO dto,
+                                           @RequestHeader("authorization") String token) throws ServletException {
         dto.setId(id);
-        Stock response = service.update(converter.convert(dto));
+        Trade response = service.update(converter.convert(dto));
         return ResponseEntity.status(HttpStatus.OK).body(converter.convert(response));
     }
 

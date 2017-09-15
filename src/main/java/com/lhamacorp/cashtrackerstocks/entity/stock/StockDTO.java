@@ -1,19 +1,12 @@
-package com.lhamacorp.cashtrackerstocks.entity;
+package com.lhamacorp.cashtrackerstocks.entity.stock;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.persistence.*;
+public class StockDTO {
 
-@Entity
-@Table(name = "stocks")
-public class Stock {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String symbol;
 
     public Long getId() {
@@ -38,11 +31,11 @@ public class Stock {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Stock stock = (Stock) o;
+        StockDTO stockDTO = (StockDTO) o;
 
         return new EqualsBuilder()
-                .append(id, stock.id)
-                .append(symbol, stock.symbol)
+                .append(id, stockDTO.id)
+                .append(symbol, stockDTO.symbol)
                 .isEquals();
     }
 

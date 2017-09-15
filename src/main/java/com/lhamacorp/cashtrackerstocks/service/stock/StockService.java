@@ -1,8 +1,7 @@
-package com.lhamacorp.cashtrackerstocks.service;
+package com.lhamacorp.cashtrackerstocks.service.stock;
 
-import com.lhamacorp.cashtrackerstocks.entity.Stock;
-import com.lhamacorp.cashtrackerstocks.entity.StockRepository;
-import com.lhamacorp.cashtrackerstocks.entity.StockValidator;
+import com.lhamacorp.cashtrackerstocks.entity.stock.Stock;
+import com.lhamacorp.cashtrackerstocks.entity.stock.StockRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
