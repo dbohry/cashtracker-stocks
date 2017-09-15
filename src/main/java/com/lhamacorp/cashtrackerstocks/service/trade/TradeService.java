@@ -14,15 +14,12 @@ public class TradeService {
 
     private TradeRepository repository;
     private TradeValidator validator;
-    private UserConverter userConverter;
 
     @Autowired
     public TradeService(TradeRepository repository,
-                        TradeValidator validator,
-                        UserConverter userConverter) {
+                        TradeValidator validator) {
         this.repository = repository;
         this.validator = validator;
-        this.userConverter = userConverter;
     }
 
     public List<Trade> getAll() {

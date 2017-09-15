@@ -20,15 +20,12 @@ public class TradeController {
 
     private TradeService service;
     private TradeConverter converter;
-    private UserClient userClient;
 
     @Autowired
     public TradeController(TradeService service,
-                           TradeConverter converter,
-                           UserClient userClient) {
+                           TradeConverter converter) {
         this.service = service;
         this.converter = converter;
-        this.userClient = userClient;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
