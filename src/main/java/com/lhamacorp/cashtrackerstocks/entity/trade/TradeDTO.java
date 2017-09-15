@@ -4,14 +4,14 @@ import com.lhamacorp.cashtrackerstocks.entity.stock.StockDTO;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.joda.time.LocalDate;
 
 public class TradeDTO {
 
     private Long id;
     private StockDTO stock;
+    private Integer shares;
     private TradeTypeEnum type;
-    private LocalDate data;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -29,6 +29,14 @@ public class TradeDTO {
         this.stock = stock;
     }
 
+    public Integer getShares() {
+        return shares;
+    }
+
+    public void setShares(Integer shares) {
+        this.shares = shares;
+    }
+
     public TradeTypeEnum getType() {
         return type;
     }
@@ -37,12 +45,12 @@ public class TradeDTO {
         this.type = type;
     }
 
-    public LocalDate getData() {
-        return data;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -56,8 +64,9 @@ public class TradeDTO {
         return new EqualsBuilder()
                 .append(id, tradeDTO.id)
                 .append(stock, tradeDTO.stock)
+                .append(shares, tradeDTO.shares)
                 .append(type, tradeDTO.type)
-                .append(data, tradeDTO.data)
+                .append(userId, tradeDTO.userId)
                 .isEquals();
     }
 
@@ -66,8 +75,9 @@ public class TradeDTO {
         return new HashCodeBuilder(17, 37)
                 .append(id)
                 .append(stock)
+                .append(shares)
                 .append(type)
-                .append(data)
+                .append(userId)
                 .toHashCode();
     }
 
@@ -76,8 +86,9 @@ public class TradeDTO {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("stock", stock)
+                .append("shares", shares)
                 .append("type", type)
-                .append("data", data)
+                .append("userId", userId)
                 .toString();
     }
 }

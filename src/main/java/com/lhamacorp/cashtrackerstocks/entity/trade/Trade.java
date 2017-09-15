@@ -1,7 +1,6 @@
 package com.lhamacorp.cashtrackerstocks.entity.trade;
 
 import com.lhamacorp.cashtrackerstocks.entity.stock.Stock;
-import com.lhamacorp.cashtrackerstocks.entity.user.User;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -23,10 +22,7 @@ public class Trade {
     private Integer shares;
     private Integer type;
     private LocalDate data;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -68,12 +64,12 @@ public class Trade {
         this.data = data;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -90,7 +86,7 @@ public class Trade {
                 .append(shares, trade.shares)
                 .append(type, trade.type)
                 .append(data, trade.data)
-                .append(user, trade.user)
+                .append(userId, trade.userId)
                 .isEquals();
     }
 
@@ -102,7 +98,7 @@ public class Trade {
                 .append(shares)
                 .append(type)
                 .append(data)
-                .append(user)
+                .append(userId)
                 .toHashCode();
     }
 
@@ -114,7 +110,7 @@ public class Trade {
                 .append("shares", shares)
                 .append("type", type)
                 .append("data", data)
-                .append("user", user)
+                .append("userId", userId)
                 .toString();
     }
 }

@@ -1,4 +1,4 @@
-package com.lhamacorp.cashtrackerstocks.service.trade;
+package com.lhamacorp.cashtrackerstocks.client;
 
 import com.lhamacorp.cashtrackerstocks.entity.user.UserDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;

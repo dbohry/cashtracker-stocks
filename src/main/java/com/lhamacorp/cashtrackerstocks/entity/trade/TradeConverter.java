@@ -21,7 +21,9 @@ public class TradeConverter {
         bo.setId(dto.getId());
         bo.setStock(stockConverter.convert(dto.getStock()));
         bo.setType(dto.getType() != null ? dto.getType().getId() : null);
-        bo.setData(dto.getData());
+        bo.setShares(dto.getShares());
+//        bo.setData(dto.getData());
+        bo.setUserId(dto.getUserId());
 
         return bo;
     }
@@ -34,8 +36,9 @@ public class TradeConverter {
         dto.setId(bo.getId());
         dto.setStock(stockConverter.convert(bo.getStock()));
         dto.setType(TradeTypeEnum.valueOfId(bo.getType()).orElse(null));
-        dto.setData(bo.getData());
-
+        dto.setShares(bo.getShares());
+//        dto.setData(bo.getData());
+        dto.setUserId(bo.getUserId());
         return dto;
     }
 

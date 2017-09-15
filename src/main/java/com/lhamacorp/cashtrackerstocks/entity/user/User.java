@@ -6,8 +6,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
 public class User {
 
     @Id

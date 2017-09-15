@@ -1,5 +1,6 @@
 package com.lhamacorp.cashtrackerstocks.controller;
 
+import com.lhamacorp.cashtrackerstocks.client.UserClient;
 import com.lhamacorp.cashtrackerstocks.entity.trade.Trade;
 import com.lhamacorp.cashtrackerstocks.entity.trade.TradeConverter;
 import com.lhamacorp.cashtrackerstocks.entity.trade.TradeDTO;
@@ -19,12 +20,15 @@ public class TradeController {
 
     private TradeService service;
     private TradeConverter converter;
+    private UserClient userClient;
 
     @Autowired
     public TradeController(TradeService service,
-                           TradeConverter converter) {
+                           TradeConverter converter,
+                           UserClient userClient) {
         this.service = service;
         this.converter = converter;
+        this.userClient = userClient;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -38,8 +42,8 @@ public class TradeController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<TradeDTO> save(@RequestBody TradeDTO dto,
                                          @RequestHeader("authorization") String token) throws ServletException {
-        Trade response = service.save(converter.convert(dto), token);
-        return ResponseEntity.status(HttpStatus.CREATED).body(converter.convert(response));
+        TradeDTO response = converter.convert(service.save(converter.convert(dto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

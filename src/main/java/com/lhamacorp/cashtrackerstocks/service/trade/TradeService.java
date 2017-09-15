@@ -2,7 +2,6 @@ package com.lhamacorp.cashtrackerstocks.service.trade;
 
 import com.lhamacorp.cashtrackerstocks.entity.trade.Trade;
 import com.lhamacorp.cashtrackerstocks.entity.trade.TradeRepository;
-import com.lhamacorp.cashtrackerstocks.entity.user.User;
 import com.lhamacorp.cashtrackerstocks.entity.user.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +14,14 @@ public class TradeService {
 
     private TradeRepository repository;
     private TradeValidator validator;
-    private UserClient userClient;
     private UserConverter userConverter;
 
     @Autowired
     public TradeService(TradeRepository repository,
                         TradeValidator validator,
-                        UserClient userClient,
                         UserConverter userConverter) {
         this.repository = repository;
         this.validator = validator;
-        this.userClient = userClient;
         this.userConverter = userConverter;
     }
 
@@ -33,12 +29,8 @@ public class TradeService {
         return repository.findAll();
     }
 
-    public Trade save(Trade trade, String token) throws ServletException {
+    public Trade save(Trade trade) throws ServletException {
         validator.validate(trade);
-
-        User user = userConverter.convert(userClient.get(trade.getUser().getId(), token));
-        trade.setUser(user);
-
         return repository.save(trade);
     }
 
