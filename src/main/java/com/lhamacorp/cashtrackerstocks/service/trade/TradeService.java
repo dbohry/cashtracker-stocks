@@ -29,6 +29,14 @@ public class TradeService {
         return repository.findAll();
     }
 
+    public List<Trade> getAllByUser(Long id) {
+        return repository.findAllByUserId(id);
+    }
+
+    public Trade getById(Long id) {
+        return repository.findOne(id);
+    }
+
     public Trade save(Trade trade) throws ServletException {
         validator.validate(trade);
         return repository.save(trade);

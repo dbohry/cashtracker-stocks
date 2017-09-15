@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ct/secure/operations")
+@RequestMapping("/ct/secure/trades")
 public class TradeController {
 
     private TradeService service;
@@ -34,6 +34,20 @@ public class TradeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<TradeDTO>> getAll(@RequestHeader("authorization") String token) {
         List<Trade> response = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(response.stream()
+                .map(converter::convert)
+                .collect(Collectors.toList()));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<TradeDTO> getAllById(@PathVariable("id") Long id, @RequestHeader("authorization") String token) {
+        Trade response = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(converter.convert(response));
+    }
+
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<TradeDTO>> getAllByUser(@PathVariable("id") Long id, @RequestHeader("authorization") String token) {
+        List<Trade> response = service.getAllByUser(id);
         return ResponseEntity.status(HttpStatus.OK).body(response.stream()
                 .map(converter::convert)
                 .collect(Collectors.toList()));
